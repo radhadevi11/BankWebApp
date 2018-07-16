@@ -13,16 +13,20 @@ public class BankServlet extends HttpServlet {
     Customer customer = new Customer("Radha","aaa","25365987");
     BankAccount myAccount = new BankAccount(25365,customer);
     public void doGet(HttpServletRequest request, HttpServletResponse response)throws IOException{
-        String depositAmount = request.getParameter("amount");
-        String withdrawAmount = request.getParameter("amount");
+        String givenAmount = request.getParameter("amount");
+        String myOption = request.getParameter("option");
         PrintWriter webWriter = response.getWriter();
-        myAccount.deposit((Double.parseDouble(depositAmount)));
+        if(myOption .equals("Deposit")) {
+            myAccount.deposit((Double.parseDouble(givenAmount)));
+        }
+        else {
+            myAccount.withdraw((Double.parseDouble(givenAmount)));
+        }
         webWriter.println("<html>");
         webWriter.println("<body>");
         webWriter.println("<h1>Mobile Bank </h1>");
         webWriter.println("<h2>The amount deposited successFully!!!</h2> ");
         webWriter.println("<h2>current balance is"+myAccount.getBalance()+"</h2>");
-        //System.out.println("The current balance is "+myAccount.getBalance());
         webWriter.println("</html>");
         webWriter.println("</body>");
 
